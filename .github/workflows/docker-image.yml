@@ -1,9 +1,11 @@
 name: Docker Image CI
-
-
 on:
   workflow_dispatch: 
        inputs:
+          image-tag:
+            type: text
+            required: true
+            description: please enter image tag name
           environment:
             type: environment  
 
@@ -33,6 +35,6 @@ jobs:
 
           
     - name: Build the Docker image
-      run: |
-       docker build . --tag swapnilak/nextjs-project1:$(date +%s)
-       docker push swapnilak/nextjs-project1:$(date +%s)
+      run: | 
+       docker build . --tag swapnilak/nextjs-project1:${{ github.events.inputs.image-tag }}
+       docker push swapnilak/nextjs-project1:${{ github.events.inputs.image-tag }}
