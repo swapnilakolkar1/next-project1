@@ -35,7 +35,7 @@ jobs:
           
     - name: Build the Docker image
       run: |
-        docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/nextjs-project1:${{github.event.inputs.['tag']}}  
+        docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/nextjs-project1:${{github.event.inputs['tag']}}  
       
         
 
