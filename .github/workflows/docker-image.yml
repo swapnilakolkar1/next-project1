@@ -12,12 +12,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment }}   
     defaults:
-
-      run:
-        shell: bash
-        
+     run:
+        shell: bash     
     steps:
     - name: User selections
       run: echo "user selected environment  ${{ github.event.inputs.environment }}"
@@ -37,5 +35,7 @@ jobs:
           
     - name: Build the Docker image
       run: |
-        format('docker build . -t {0}/nextjs-project1:{1}', secrets.DOCKERHUB_USERNAME,github.event.inputs.tag )  
+        docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/nextjs-project1:${{github.event.inputs.['tag']}}  
+      
+        
 
