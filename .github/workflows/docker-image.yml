@@ -2,7 +2,7 @@ name: Docker Image CI
 on:
   workflow_dispatch: 
        inputs:
-          image-tag:
+          tag:
             type: text
             required: true
             description: please enter image tag name
@@ -35,6 +35,7 @@ jobs:
 
           
     - name: Build the Docker image
-      run: |
-       docker build . --tag ${ secrets.DOCKERHUB_USERNAME }/nextjs-project1:${github.event.inputs.image-tag}
+      run:  |
+       docker build . -t  $secrets.DOCKERHUB_USERNAME /nextjs-project1: $github.event.inputs.tag 
+       
 
