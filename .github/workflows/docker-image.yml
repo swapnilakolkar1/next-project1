@@ -35,6 +35,6 @@ jobs:
 
           
     - name: Build the Docker image
-      run: | 
-       docker build . --tag "swapnilak/nextjs-project1:${ github.events.inputs.image-tag }"
-       docker push "swapnilak/nextjs-project1:${ github.events.inputs.image-tag}"
+      run: |
+       docker build . --tag ${ secrets.DOCKERHUB_USERNAME }/nextjs-project1:${github.event.inputs.image-tag}
+
