@@ -8,11 +8,13 @@ on:
             type: environment  
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
+    environment: ${{ github.event.inputs.environment }}
+    defaults:
+      run:
+        shell: bash
+        
     steps:
     - name: User selections
       run: echo "user selected environment  ${{ github.event.inputs.environment }}"
@@ -20,13 +22,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    -
-      name: Set up Docker Buildx
+    - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: Docker User login
-      run: |
-       docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
           
     - name: Build the Docker image
